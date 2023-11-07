@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "workflows"
+version = "0.1.0"
+description = ""
+authors = ["Antoine POPINEAU <antoine@popineau.eu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+prefect = "^2.14.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

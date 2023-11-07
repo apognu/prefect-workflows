@@ -1,0 +1,48 @@
+# Welcome to your prefect.yaml file! You can use this file for storing and managing
+# configuration for deploying your flows. We recommend committing this file to source
+# control along with your flow code.
+
+# Generic metadata about this project
+name: workflows
+prefect-version: 2.14.3
+
+# build section allows you to manage and build docker images
+build:
+
+# push section allows you to manage if and how this project is uploaded to remote locations
+push:
+
+# pull section allows you to provide instructions for cloning this project in remote locations
+pull:
+- prefect.deployments.steps.git_clone:
+    repository: https://github.com/apognu/prefect-workflows.git
+    branch: master
+
+# the deployments section allows you to provide configuration for deploying flows
+deployments:
+- name: sayhello
+  version:
+  tags: []
+  description:
+  entrypoint: simple-push/push.py:say_hello
+  parameters: {}
+  work_pool:
+    name: local-runner
+    work_queue_name:
+    job_variables: {}
+  schedule:
+- name: tuigreet_stars
+  version:
+  tags: []
+  description:
+  entrypoint: github-stars/notify-on-stars.py:notify_on_stars
+  parameters:
+    repo: apognu/tuigreet
+  work_pool:
+    name: local-runner
+    work_queue_name:
+    job_variables: {}
+  schedule:
+    cron: '*/5 * * * *'
+    timezone: Europe/Paris
+    day_or: true
